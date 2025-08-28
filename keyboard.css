@@ -1,0 +1,269 @@
+@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&family=Mozilla+Headline:wght@200..700&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap');
+
+:root{
+    --color-one:  #284773;
+    --color-two:  #5380b1;
+    --color-three:#8bbee2;
+    --color-four: #cee9f8;
+    --color-five: #0b2549;}
+
+body{
+    margin: 0;
+    padding: 0;
+    background-image: url(pics/mountain_landscape3_generated.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment:fixed ;
+    color: white;
+    font-family: "DynaPuff", system-ui;}
+
+body::selection{
+    background-color: transparent;}
+
+#area{
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    display: flex;
+    transform: translate(-50%,-50%);
+    padding: 10px;
+    border-radius: 120px;
+    width: 1800px;
+    gap: 100px;
+    border: 2px solid white;
+    height: 700px;
+    align-items: center;
+    justify-content: center;
+    width: 1850px;
+    backdrop-filter: blur(20px);}
+
+#btn-Area{
+    background-color: black;
+    align-items: center;
+    justify-self: center;
+    display: flex;
+    padding: 0 15px 0 15px;
+    height:  45px;
+    width: 50%;
+    margin: 5px 30px 0 26px;
+    transform: translateY(120px);
+    position: relative;
+    z-index: 999;
+    border-radius: 2px;
+    background-color: rgba(39, 39, 39, 0.5);
+    border: 1px solid white;
+    white-space: nowrap; 
+    overflow-x: auto;      
+    color: rgb(255, 255, 255);}
+
+#btn-Area::-webkit-scrollbar {
+  display: none;}
+
+#keyboardArea{
+    border: 1px solid white;
+    height: 500px;
+    border-radius: 20px;
+    background-color: rgba(39, 39, 39, 0.5);}
+
+.midButtons:hover, .longButtons:hover, .smallButtons:hover, #Lshift:hover ,#ShiftRight:hover, #Backspace:hover, .space:hover{
+    background-color: var(--color-two);}
+
+#mouse{
+    height: 500px;
+    width: 300px;
+    border: 1px solid white;
+    float: right;
+    border-radius:150px 150px 90px 90px;
+    display: flex;
+    background-color: rgba(39, 39, 39, 0.5);}
+
+#leftClick{
+    width: 134px;
+    height: 235px;
+    border: 1px solid white;
+    border-radius: 150px 0 25px 0;
+    border-left: none;
+    border-top: none;
+    justify-content: center;
+    display: flex;
+    align-items: center;}
+
+#middleClick{
+    width: 30px;
+    height: 150px;
+    justify-content: center;
+    display: flex;
+    align-items: center;}
+
+#rightClick{
+    width: 132px;
+    height: 235px;
+    border-radius: 0 150px 0 25px;
+    border: 1px solid white;
+    border-right: none;
+    border-top: none;
+    justify-content: center;
+    display: flex;
+    align-items: center; }
+
+#mouseWheel{
+    border: 2px solid white;
+    height: 70px;
+    width: 32px;
+    border-left: none;
+    border-right: none;
+    border-radius:30px;}
+
+#leftClick:hover, #rightClick:hover, #mouseWheel:hover{
+    background-color: #011024;
+    border: 1px solid white;}
+
+#rowOne{
+    display: flex;
+    margin: 25px 25px 25px 25px;
+    gap: 5px;}
+
+#rowTwo,#rowThree,#rowFour,#rowFive,#rowSix{
+    display: flex;
+    margin: 0 25px 10px 25px;
+    gap: 5px;}
+
+.smallButtons, #Backspace, #Tab, .longButtons, .midButtons, .space, #CapsLock,#ShiftRight,#Numpad0,#Lshift, #Enter{
+    border: 1px solid white;
+    border-radius: 20px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content:center;}
+
+#Backspace{
+    width: 109px;}
+
+#Tab{
+    width: 80px;}
+
+.longButtons{
+    height: 112px;
+    margin-bottom:-72px ;}
+
+.midButtons{
+    width: 62.22px;}
+
+.space{
+    width: 365px;}
+
+#CapsLock{
+    width: 95px;}
+
+#ShiftRight{
+    width: 154px;}
+
+#Numpad0{
+    width: 107px;}
+
+#Enter{
+    margin-left: 20px;
+    width: 59px;
+    height: 112px;
+    border-radius: 0 10px 10px 10px;
+    margin-bottom: -67px;
+    font-size: 32px;}
+
+#Enter::before{
+    margin-left: -80px;
+    margin-bottom: 60px;
+    border: 1px solid white;
+    border-radius: 10px 0 0 10px;
+    border-right:none ;
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 50px;
+    transform: translateY(-1px);}
+
+#rowOne span:nth-child(2){
+    margin-left: 56px;}
+
+#rowOne span:nth-child(6),#rowOne span:nth-child(10){
+    margin-left: 30px;}
+
+#rowOne span:nth-child(14){
+    margin-left: 30px;
+    font-size: 12px;}
+
+#rowOne span:nth-child(15),#rowOne span:nth-child(16){
+    font-size: 12px;}
+
+#rowTwo span:nth-child(15){
+    margin-left: 30px;
+    font-size: 14px;  }
+
+#rowTwo span:nth-child(18){
+    margin-left: 57px;}
+
+#rowTwo span:nth-child(16),#rowTwo span:nth-child(17){
+    font-size: 13px;}
+
+#rowThree span:nth-child(3){
+    background-color: rgb(110, 34, 34);    }
+
+#rowThree span:nth-child(15){
+    margin-left: 29px;}
+
+#rowThree span:nth-child(18){
+    margin-left: 58px;}
+
+#rowThree span:nth-child(16),#rowThree span:nth-child(17){
+    font-size: 12px;}
+
+#rowThree span:nth-child(21){
+    font-size: 32px;}
+
+#rowFour span:nth-child(2),#rowFour span:nth-child(3),#rowFour span:nth-child(4){
+    background-color: rgb(110, 34, 34);}
+
+#rowFour span:nth-child(14){
+    margin-left: 329px;}
+
+#rowFive span:nth-child(14){
+    margin-left: 87px;}
+
+#rowFive span:nth-child(15){
+    margin-left: 114px;}
+
+#rowFive span:nth-child(14){
+    font-size: 32px;
+    background-color: rgb(110, 34, 34);}
+
+#rowFive span:nth-child(18){
+    font-size:32px;}
+
+#rowSix span:nth-child(9){
+    margin-left: 30px;}
+
+#rowSix span:nth-child(12){
+    margin-left: 57px;}
+
+#rowSix span:nth-child(2),#rowSix span:nth-child(7){
+    font-size: 25px;}
+
+#rowSix span:nth-child(9),#rowSix span:nth-child(10),#rowSix span:nth-child(11){
+    font-size: 32px;
+    background-color: rgb(110, 34, 34);}
+
+#rowSix span:nth-child(9):hover,#rowSix span:nth-child(10):hover,#rowSix span:nth-child(11):hover,
+#rowFive span:nth-child(14):hover,
+#rowThree span:nth-child(3):hover,
+#rowFour span:nth-child(2):hover,#rowFour span:nth-child(3):hover,#rowFour span:nth-child(4):hover{
+    background-color: var(--color-five);}
+
+body marquee{
+    display: flex;
+    align-items: center;
+    height: 35px;
+    color: rgb(141, 15, 15);
+    transform: translateY(15px);
+    background-color: #0b25495e;
+}
