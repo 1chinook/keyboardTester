@@ -1,90 +1,97 @@
-const buttons = ["A","B","C","Ç","D","E","F","G","Ğ","H","I","J","K","L","M","N","O","Ö","P","R","S","Ş","T","U","Ü"
-    ,"V","Y","Z","W","X","Q","a","b","c","ç","d","e","f","g","ğ","h","ı","j","k","l","m","n","o","ö","p","r","s","ş","t","u","ü"
-    ,"v","y","z","w","x","q",]  //buttons //  
+"use strict";
 
-let result = ""; //Keyboard Section Start //  
-                        //KeyDown//
-document.addEventListener("keydown", function(e){
-    e.preventDefault();
-    console.log("Key:" + e.key + " Code:" + e.code);
-    let button = e.key;
-if (["Tab","Shift","Control","Meta","Alt","i","IntlBackslash","Slash"].includes(e.key)){
-        let newButton = e.code;
-        document.getElementById(newButton).style.backgroundColor = "#0b2549";
-        }
-    else if(buttons.includes(button)){
-        button = e.key.toLocaleLowerCase('tr-TR');
-        document.getElementById("key-" + button).style.backgroundColor = "#0b2549";
-        }
-    else{
-        let specialButton = e.code;
-        document.getElementById(specialButton).style.backgroundColor = "#0b2549";
-        }      
-    });
-                          //KeyUP// 
-document.addEventListener("keyup", function(e){
-    e.preventDefault();
-    console.log("Key:" + e.key + " Code:" + e.code);
-    let button = e.key;
-    if (["Tab","Shift","Control","Meta","Alt","i","IntlBackslash","Slash"].includes(e.key)){  
-        let newButton = e.code;
-        document.getElementById(newButton).style.backgroundColor = "#5380b1";
-        }
+const keyboard = document.getElementById("keyboardArea");
+const mouse = document.getElementById("mouse");
+const history = document.getElementById("btn-Area");
+const letterByCode = {
+    "KeyQ": "q",
+    "KeyW": "w",
+    "KeyE": "e",
+    "KeyR": "r",
+    "KeyT": "t",
+    "KeyY": "y",
+    "KeyU": "u",
+    "KeyI": "ı",
+    "KeyO": "o",
+    "KeyP": "p",
+    "BracketLeft": "ğ",
+    "BracketRight": "ü",
+    "KeyA": "a",
+    "KeyS": "s",
+    "KeyD": "d",
+    "KeyF": "f",
+    "KeyG": "g",
+    "KeyH": "h",
+    "KeyJ": "j",
+    "KeyK": "k",
+    "KeyL": "l",
+    "Semicolon": "ş",
+    "KeyZ": "z",
+    "KeyX": "x",
+    "KeyC": "c",
+    "KeyV": "v",
+    "KeyB": "b",
+    "KeyN": "n",
+    "KeyM": "m",
+    "Comma": "ö",
+    "Period": "ç"
+};
+const mouseButtons = [
+    ["leftClick", "Left Click"],
+    ["mouseWheel", "Middle Click"],
+    ["rightClick", "Right Click"],
+];
+const pressed = new Set();
+const recentInputs = [];
 
-    else if(buttons.includes(button)){
-        button = e.key.toLocaleLowerCase('tr-TR');
-        document.getElementById("key-" + button).style.backgroundColor = "#5380b1";
-        }
-
-    else{
-        let specialButton = e.code;
-        document.getElementById(specialButton).style.backgroundColor = "#5380b1";
-        }  
-    result += "<" + e.code + ">   ";
-    let area = document.getElementById("btn-Area");
-    area.innerText = result;
-    area.scrollLeft = area.scrollWidth;
-    });  //Keyboard Section End //    
-        //MouseSection Start //  //MouseDown//
-document.addEventListener("mousedown", function(e){
-    e.preventDefault();
-    switch(e.button){
-        case 0:
-            document.getElementById("leftClick").style.backgroundColor = "#0b2549";
-            break;
-        case 1:
-            document.getElementById("mouseWheel").style.backgroundColor = "#0b2549";
-            break;
-        case 2:
-            document.getElementById("rightClick").style.backgroundColor = "#0b2549";  
-            break;          
+function highlight(element, active) {
+    if (active) {
+        pressed.add(element);
+        element.style.backgroundColor = "#0b2549";
+    } else {
+        pressed.delete(element);
+        element.style.removeProperty("background-color");
     }
-})
-                            //MouseUp//
-document.addEventListener("mouseup", function(e){
-    e.preventDefault();
-    switch(e.button){
-        case 0:
-            document.getElementById("leftClick").style.backgroundColor = "#5380b1";
-            break;
-        case 1:
-            document.getElementById("mouseWheel").style.backgroundColor = "#5380b1";
-            break;
-        case 2:
-            document.getElementById("rightClick").style.backgroundColor = "#5380b1";  
-            break;}
+}
 
-        let buttonResult = (e.button ===  0 ? "Left Click" : e.button === 1 ? "Middle Click" : "Right Click");
-        result += "<" +buttonResult+">   "
-        let area = document.getElementById("btn-Area");
-        area.innerText = result;
-        area.scrollLeft = area.scrollWidth;
-})
-document.addEventListener("contextmenu", function(e){
-    e.preventDefault();
-});  //MouseSection End // 
+function record(label) {
+    recentInputs.push(`<${label}>`);
+    if (recentInputs.length > 50) recentInputs.shift();
+    history.textContent = recentInputs.join("   ");
+    history.scrollLeft = history.scrollWidth;
+}
 
+function handleKey(event) {
+    const id = letterByCode[event.code] ? `key-${letterByCode[event.code]}` : event.code;
+    const key = document.getElementById(id);
+    if (!key || !keyboard.contains(key)) return;
 
+    if (!event.ctrlKey && !event.metaKey && !event.altKey && event.key !== "Tab") {
+        event.preventDefault();
+    }
+    const active = event.type === "keydown";
+    highlight(key, active);
+    if (!active) record(event.code);
+}
 
+document.addEventListener("keydown", handleKey);
+document.addEventListener("keyup", handleKey);
 
-//  There is a problem about AltGR //
+mouse.addEventListener("mousedown", (event) => {
+    const button = mouseButtons[event.button];
+    if (button) highlight(document.getElementById(button[0]), true);
+});
+
+document.addEventListener("mouseup", (event) => {
+    const button = mouseButtons[event.button];
+    if (!button) return;
+    const element = document.getElementById(button[0]);
+    if (!pressed.has(element)) return;
+    highlight(element, false);
+    record(button[1]);
+});
+
+mouse.addEventListener("contextmenu", (event) => event.preventDefault());
+window.addEventListener("blur", () => {
+    for (const element of pressed) highlight(element, false);
+});
